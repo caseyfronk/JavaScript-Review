@@ -1,5 +1,9 @@
 /* Declare and Define the functions here that will make the function calls below work properly */
 
+function first(arr, func) {
+    func(arr[0]);
+}
+
 
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
@@ -12,7 +16,9 @@ first(names, function(firstName){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
+function last(arr, func) {
+    func(arr[arr.length - 1]);
+}
 
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
@@ -26,23 +32,32 @@ last(names, function(lastName){
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
 //have the contains function return a boolean value for if the name is in the array or not.
-
+function contains(target, arr, func) {
+    var result = false;
+    for(var i = 0; i < arr.length; i++) {
+        if(arr[i] === target) {
+            result = true;
+        }
+    }
+    func(result);
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-contains('Colt', names, function(yes){
-  if(yes){
+contains('Colt', names, function(result){
+  if(result){
     console.log('Colt is in the array');
   } else {
     console.log('Colt is not in the list');
   }
 });
 
-
-
-
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
+function map(arr, func) {
+    for(var i = 0; i < arr.length; i++) {
+        arr[i] = func(arr[i]);
+    }
+}
 
 
 var numbers = [1,2,3,4,5];
@@ -56,8 +71,17 @@ map(numbers, function(num){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
-
+function uniq(arr, func) {
+    for(var i = 0; i < arr.length; i++) {
+        var test = arr[i];
+        for(var j = 0; j < arr.length; j++) {
+            if(arr[j] === test && i !== j) {
+                arr.splice(j, 1);
+            }
+        }
+    }
+    func(arr);
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 uniq(names, function(uniqArr){
@@ -69,12 +93,15 @@ uniq(names, function(uniqArr){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
-
+function each(arr, func) {
+    for(var i = 0; i < arr.length; i++) {
+        func(arr[i], i);
+    }
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-each(names, function(item, indice){
-  console.log('The item in the ' + indice + 'position is ' + item)
+each(names, function(item, indice){    
+  console.log('The item in the ' + indice + ' position is ' + item)
 });
 
 
@@ -82,8 +109,13 @@ each(names, function(item, indice){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
-
+function getUserById(target, obj, func) {
+    for(var i = 0; i < obj.length; i++) {
+        if(obj[i].id === target) {
+            func(obj[i]);
+        }
+    }
+}
 
 var users = [
   {
@@ -106,7 +138,7 @@ var users = [
   },
 ];
 getUserById('16t', users, function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + 'the name of ' + user.name + ' and the address of ' + user.address); 
+  console.log('The user with the id 16t has the email of ' + user.email + ', the name of ' + user.name + ', and the address of ' + user.address + '.'); 
 });
 
 
